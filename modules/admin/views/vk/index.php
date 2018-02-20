@@ -17,13 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
               <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
             </div>
             <div class="box-body">
-                <?php Pjax::begin(); ?>    
+                <?php Pjax::begin(); ?>
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
                     'columns' => [
                         [
-                            'class' => 'yii\grid\SerialColumn', 
+                            'class' => 'yii\grid\SerialColumn',
                             'headerOptions' => ['width' => '40', 'style' => 'text-align: center;'],
                             'contentOptions' => ['style' => 'text-align: center;'],
                         ],
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'password',
                         [
                             'class' => 'yii\grid\ActionColumn',
-                            'header' => 'Действия', 
+                            'header' => 'Действия',
                             'headerOptions' => ['width' => '80'],
                             'contentOptions' => ['style' => 'text-align: center;'],
                             'template' => '{update} {delete}',

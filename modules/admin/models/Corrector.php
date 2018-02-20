@@ -27,6 +27,7 @@ class Corrector extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['in', 'out'], 'required'],
             [['in', 'out'], 'string', 'max' => 255],
         ];
     }
@@ -38,8 +39,8 @@ class Corrector extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'in' => 'In',
-            'out' => 'Out',
+            'in' => 'Исходный запрос',
+            'out' => 'Итоговый запрос',
         ];
     }
 }
