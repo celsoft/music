@@ -1,6 +1,5 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
@@ -9,38 +8,28 @@ $config = [
     'sourceLanguage' => 'ru-RU',
     'language'=>'ru-RU',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'boot'],
+    'bootstrap' => ['log', 'ModuleManager'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'boot'=>[
-            'class' => 'app\modules\main\components\boot'
+        'ModuleManager'=>[
+            'class' => 'app\modules\core\components\ModuleManager'
         ],
         'request' => [
             'baseUrl' => '',
             'cookieValidationKey' => 'w9J7TkGM4SOf_8aXRY_mKRwwHVlIjvt_',
         ],
-        'view' => [
-            'theme' => [
-                'basePath' => '@app/themes/base',
-                'baseUrl' => '@web/themes/base',
-                'pathMap' => [
-                    '@app/views' => '@app/themes/base/views',
-                    '@app/modules' => '@app/themes/base/modules',
-                ],
-            ],
-        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\modules\main\models\User',
+            'identityClass' => 'app\modules\core\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
-            'errorAction' => 'main/default/error',
+            'errorAction' => 'core/default/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -86,9 +75,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'main/default/index',
-                'login' => 'main/default/login',
-                'logout' => 'main/default/logout',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<_a:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/<_a>',
                 '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>' => '<_m>/<_c>/view',
                 '<_m:[\w\-]+>' => '<_m>/default/index',
@@ -97,32 +83,28 @@ $config = [
         ],
     ],
     'modules' => [
-        'main' => [
-            'class' => 'app\modules\main\Module',
+        'core' => [
+            'class' => 'app\modules\core\Module',
         ],
-        'admin' => [
-            'class' => 'app\modules\admin\Module',
-            'layout' => 'main',
-            'layoutPath' => '@app/modules/admin/views/layouts',
-        ],
+        //'admin' => [
+        //    'class' => 'app\modules\admin\Module',
+        //    'layout' => 'main',
+        //    'layoutPath' => '@app/modules/admin/views/layouts',
+        //],
     ],
-    'params' => $params,
 ];
 
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-    //$config['bootstrap'][] = 'debug';
-    //$config['modules']['debug'] = [
-    //    'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1', '213.87.96.162'],
-    //];
+if (YII_DEBUG) {
+$config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*'],
+    ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '::1', '213.87.96.162'],
+        'allowedIPs' => ['*'],
     ];
 }
 

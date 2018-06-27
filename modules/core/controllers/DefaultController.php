@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\main\controllers;
+namespace app\modules\core\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\modules\main\models\LoginForm;
+use app\modules\core\models\LoginForm;
 
 /**
  * Default controller for the `main` module
