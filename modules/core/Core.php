@@ -21,6 +21,7 @@ class Core extends Module implements ModuleInterface
     {
         $app->getUrlManager()->addRules([
             '' => 'core/default/index',
-        ]);
+            'admin' => 'core/admin/index',
+        ], false);
     }
 }
