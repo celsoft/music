@@ -20,7 +20,7 @@ class Core extends Module implements ModuleInterface
     public function bootstrap($app)
     {
         $app->getUrlManager()->addRules([
-            'admin/test' => 'admin/default/test',
+            '' => 'core/default/index',
         ]);
     }
 }

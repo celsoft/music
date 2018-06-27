@@ -24,6 +24,16 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/themes/base',
+                'baseUrl' => '@web/themes/base',
+                'pathMap' => [
+                    '@app/views' => '@app/themes/base/views',
+                    '@app/modules' => '@app/themes/base/modules',
+                ],
+            ],
+        ],
         'user' => [
             'identityClass' => 'app\modules\core\models\User',
             'enableAutoLogin' => true,
@@ -70,7 +80,13 @@ $config = [
                 ]
             ],
         ],
-        'db' => $db,
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=' . $db['hostname'] . ';dbname=' . $db['database'],
+            'username' => $db['username'],
+            'password' => $db['password'],
+            'charset' => 'utf8',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
